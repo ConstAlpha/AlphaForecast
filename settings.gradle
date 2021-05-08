@@ -1,2 +1,3 @@
 rootProject.name = "AlphaForecast"
 include ':app'
+include ':ForecastData'
