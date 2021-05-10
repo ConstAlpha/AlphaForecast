@@ -1,2 +1,5 @@
 rootProject.name = "AlphaForecast"
 include ':app'
+include ':ui'
+include ':ui:standard-ui'
+include ':ui:common'
