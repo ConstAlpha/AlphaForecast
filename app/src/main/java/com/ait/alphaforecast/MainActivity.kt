@@ -18,30 +18,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-
-        val startButton = findViewById<Button>(R.id.start_button)
-
-        startButton.setOnClickListener {
-            val forecastManager = WeatherForecastManager(ForecastSource.OPEN_WEATHER)
-            lifecycleScope.launch(Dispatchers.Main) {
-                getWeatherInfo(forecastManager, 56.19, 44.0)
-            }
-        }
-    }
-
-    private suspend fun getWeatherInfo(
-        forecastManager: com.ait.dataimplementation.WeatherForecastManager,
-        latitude: Double,
-        longitude: Double
-    ) {
-        val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
-        val resultTextView = findViewById<TextView>(R.id.result_text_view)
-        resultTextView.text = ""
-        progressBar.visibility = View.VISIBLE
-
-        val info = forecastManager.getWeatherInfo(latitude, longitude)
-
-        resultTextView.text = info?.currentWeather.toString()
-        progressBar.visibility = View.GONE
     }
 }

@@ -2,3 +2,6 @@ rootProject.name = "AlphaForecast"
 include ':app'
 include ':DataAPI'
 include ':DataImplementation'
+include ':ui'
+include ':ui:standard-ui'
+include ':ui:common'

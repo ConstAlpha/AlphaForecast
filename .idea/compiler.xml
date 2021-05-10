@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="1.7">
       <module name="AlphaForecast.app" target="11" />
       <module name="AlphaForecast.ForecastData" target="11" />
+      <module name="AlphaForecast.ui.common" target="11" />
+      <module name="AlphaForecast.ui.standard-ui" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
