@@ -7,8 +7,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.ait.forecastdata.WeatherForecastManager
-import com.ait.forecastdata.models.weather.ForecastSource
+import com.ait.dataapi.model.ForecastSource
+import com.ait.dataimplementation.WeatherForecastManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -25,13 +25,12 @@ class MainActivity : AppCompatActivity() {
             val forecastManager = WeatherForecastManager(ForecastSource.OPEN_WEATHER)
             lifecycleScope.launch(Dispatchers.Main) {
                 getWeatherInfo(forecastManager, 56.19, 44.0)
-
             }
         }
     }
 
     private suspend fun getWeatherInfo(
-        forecastManager: WeatherForecastManager,
+        forecastManager: com.ait.dataimplementation.WeatherForecastManager,
         latitude: Double,
         longitude: Double
     ) {

@@ -10,7 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/ForecastData" />
+            <option value="$PROJECT_DIR$/DataAPI" />
+            <option value="$PROJECT_DIR$/DataImplementation" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
