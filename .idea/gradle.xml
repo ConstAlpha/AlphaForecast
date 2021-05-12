@@ -10,9 +10,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/DataAPI" />
-            <option value="$PROJECT_DIR$/DataImplementation" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/data-api" />
+            <option value="$PROJECT_DIR$/data-implementation" />
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/common" />
             <option value="$PROJECT_DIR$/ui/standard-ui" />

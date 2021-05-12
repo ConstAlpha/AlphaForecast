@@ -1,10 +1,6 @@
 package com.ait.alphaforecast
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ait.dataapi.model.ForecastSource
@@ -18,5 +14,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            val info = WeatherForecastManager(OWAppIdProvider(application), ForecastSource.OPEN_WEATHER)
+                .getWeatherInfo(56.300560, 43.847348) // Sortirovka mode
+            println(info)
+        }
     }
 }

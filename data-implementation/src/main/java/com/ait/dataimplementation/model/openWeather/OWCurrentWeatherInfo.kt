@@ -1,6 +1,8 @@
 package com.ait.dataimplementation.model.openWeather
 
+import com.ait.dataapi.model.CurrentWeather
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 internal data class OWCurrentWeatherInfo (
     @SerializedName("dt") val forecastedDateTime: Int,

@@ -4,8 +4,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = java_version
+    targetCompatibility = java_version
 }
 
 dependencies {
@@ -13,5 +13,6 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.3.0"
     implementation "com.squareup.retrofit2:converter-gson:2.3.0"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-    implementation project(path: ':DataAPI')
+    testImplementation 'junit:junit:4.13.2'
+    implementation project(path: ':data-api')
 }
