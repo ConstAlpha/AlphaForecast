@@ -1,11 +1,11 @@
 package com.ait.alphaforecast
 
-import android.app.Application
-import com.ait.dataapi.AppIdProvider
+import android.content.res.AssetManager
+import com.ait.data.openweather.AppIdProvider
 
-class OWAppIdProvider(private val application: Application): AppIdProvider {
+class OWAppIdProvider(private val assetManager: AssetManager): AppIdProvider {
     override fun getAppId(): String {
-        val bufferReader = application.assets
+        val bufferReader = assetManager
             .open("OpenWeatherAppId.txt")
             .bufferedReader()
 
