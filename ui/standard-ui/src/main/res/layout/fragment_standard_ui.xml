@@ -1,25 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="com.ait.ui.common.TimeOfDay" />
 
         <variable
             name="viewModel"
             type="com.ait.ui.standard.viewmodel.StandardUiViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello world!!"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <com.ait.ui.standard.view.WeatherView
+            android:id="@+id/weather"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:updateDayTime="@{viewModel.dayTime}" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <Button
+            android:id="@+id/dayButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:onClick="@{() -> viewModel.changeDayTime(TimeOfDay.DAY)}"
+            android:text="Day"
+            app:layout_constraintEnd_toStartOf="@id/center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather" />
+
+        <Button
+            android:id="@+id/nightButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:onClick="@{() -> viewModel.changeDayTime(TimeOfDay.NIGHT)}"
+            android:text="Night"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/center"
+            app:layout_constraintTop_toBottomOf="@id/weather" />
+
+        <Button
+            android:id="@+id/sunriseButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="@{() -> viewModel.changeDayTime(TimeOfDay.SUNRISE)}"
+            android:text="Sunrise"
+            app:layout_constraintEnd_toStartOf="@id/center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dayButton" />
+
+        <Button
+            android:id="@+id/sunsetButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="@{() -> viewModel.changeDayTime(TimeOfDay.SUNSET)}"
+            android:text="Sunset"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/center"
+            app:layout_constraintTop_toBottomOf="@id/nightButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
