@@ -3,9 +3,9 @@ package com.ait.data.openweather.model
 import com.google.gson.annotations.SerializedName
 
 internal data class OwDayWeatherInfo(
-    @SerializedName("dt") val forecastedDateTime: Int,
-    @SerializedName("sunrise") val sunrise: Int,
-    @SerializedName("sunset") val sunset: String,
+    @SerializedName("dt") val forecastedDateTime: Long,
+    @SerializedName("sunrise") val sunrise: Long,
+    @SerializedName("sunset") val sunset: Long,
     @SerializedName("moonrise") val moonrise: Int,
     @SerializedName("moonset") val moonset: Int,
     @SerializedName("moon_phase") val moonPhase: Double,

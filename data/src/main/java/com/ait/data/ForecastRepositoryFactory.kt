@@ -9,6 +9,7 @@ import com.ait.domain.model.ForecastSource
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,24 +18,27 @@ class ForecastRepositoryFactory {
         appIdProvider: AppIdProvider,
         source: ForecastSource
     ): ForecastRepository {
-        // TODO: Will be reworked later with Hilt
+        // TODO: Will be reworked later with Koin
         return when (source) {
             ForecastSource.OPEN_WEATHER -> {
-                val client = OkHttpClient().newBuilder()
-
-                val appId: String = appIdProvider.getAppId()
-                client.addInterceptor { chain ->
-                    var request: Request = chain.request()
-                    val url: HttpUrl = request
-                        .url()
-                        .newBuilder()
-                        .addQueryParameter("appid", appId)
-                        .build()
-                    request = request
-                        .newBuilder()
-                        .url(url)
-                        .build()
-                    chain.proceed(request)
+                val client = OkHttpClient().newBuilder().also {
+                    val appId: String = appIdProvider.getAppId()
+                    it.addInterceptor { chain ->
+                        var request: Request = chain.request()
+                        val url: HttpUrl = request
+                            .url
+                            .newBuilder()
+                            .addQueryParameter("appid", appId)
+                            .build()
+                        request = request
+                            .newBuilder()
+                            .url(url)
+                            .build()
+                        chain.proceed(request)
+                    }
+                    it.addInterceptor(HttpLoggingInterceptor().also { interceptor ->
+                        interceptor.level = HttpLoggingInterceptor.Level.BODY
+                    })
                 }
 
                 val retrofit = Retrofit.Builder()

@@ -97,13 +97,19 @@ class WeatherView(context: Context, attributeSet: AttributeSet) : View(context, 
 
             ValueAnimator.ofInt(ALPHA_MIN_VALUE, ALPHA_MAX_VALUE).apply {
                 duration = ANIMATION_DURATION
-                addUpdateListener { changeDrawablesAlpha(it.animatedValue as Int) }
+                addUpdateListener {
+                    (it.animatedValue as Int).let { value ->
+                        changeDrawablesAlpha(value)
+                        if (value == ALPHA_MAX_VALUE) {
+                            oldDrawable = null
+                        }
+                    }
+                }
                 start()
             }
         }
 
         private fun changeDrawablesAlpha(newValue: Int) {
-            oldDrawable?.alpha = ALPHA_MAX_VALUE - newValue
             currentDrawable.alpha = newValue
 
             parentView.invalidate()

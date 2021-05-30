@@ -8,9 +8,9 @@ import java.util.*
 
 internal fun OwDayWeatherInfo.toDayForecastedWeather(): DayForecastedWeather {
     return DayForecastedWeather(
-        date = Date(this.forecastedDateTime.toLong()),
-        sunriseTime = Date(this.sunrise.toLong()),
-        sunsetTime = Date(this.sunset.toLong()),
+        date = Date(this.forecastedDateTime * 1000),
+        sunriseTime = Date(this.sunrise * 1000),
+        sunsetTime = Date(this.sunset * 1000),
         temperatureMorning = this.temperature.morning.toInt(),
         temperatureDay = this.temperature.day.toInt(),
         temperatureEvening = this.temperature.evening.toInt(),
@@ -23,8 +23,8 @@ internal fun OwDayWeatherInfo.toDayForecastedWeather(): DayForecastedWeather {
 
 internal fun OwCurrentWeatherInfo.toDayForecastedWeather(): CurrentWeather {
     return CurrentWeather(
-        sunriseTime = Date(this.sunrise.toLong()),
-        sunsetTime = Date(this.sunset.toLong()),
+        sunriseTime = Date(this.sunrise * 1000),
+        sunsetTime = Date(this.sunset * 1000),
         temperature = this.temperature.toInt(),
         humidity = this.humidity,
         clouds = this.clouds,
