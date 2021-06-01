@@ -2,7 +2,7 @@ package com.ait.data.openweather.model
 
 import com.google.gson.annotations.SerializedName
 
-internal data class OwCurrentWeatherInfo (
+data class OwCurrentWeatherInfo (
     @SerializedName("dt") val forecastedDateTime: Long,
     @SerializedName("sunrise") val sunrise: Long,
     @SerializedName("sunset") val sunset: Long,

@@ -10,6 +10,7 @@ import com.ait.ui.common.TimeOfDay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.io.Console
 
 sealed class UiState {
     object Loading : UiState()
