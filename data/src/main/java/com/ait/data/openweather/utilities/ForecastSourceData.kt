@@ -1,4 +1,4 @@
-package com.ait.domain.model
+package com.ait.data.openweather.utilities
 
 import okhttp3.Interceptor
 

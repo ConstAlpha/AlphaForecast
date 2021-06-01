@@ -2,7 +2,6 @@ package com.ait.data.openweather.utilities
 
 import com.ait.data.openweather.AppIdProvider
 import com.ait.data.openweather.source.OpenWeatherService
-import com.ait.domain.model.ForecastSourceData
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request

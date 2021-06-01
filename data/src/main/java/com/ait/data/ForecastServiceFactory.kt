@@ -1,6 +1,6 @@
 package com.ait.data
 
-import com.ait.domain.model.ForecastSourceData
+import com.ait.data.openweather.utilities.ForecastSourceData
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
