@@ -7,8 +7,8 @@ import retrofit2.http.Query
 
 internal interface OpenWeather {
     @GET("onecall?units=metric&exclude=minutely,hourly,alerts")
-    fun getWeatherForecast(
+    suspend fun getWeatherForecast(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double
-    ): Call<OwCommonWeatherInfo>
+    ): OwCommonWeatherInfo
 }

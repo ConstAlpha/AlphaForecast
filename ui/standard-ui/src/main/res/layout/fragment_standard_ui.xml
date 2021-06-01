@@ -6,6 +6,10 @@
 
         <import type="com.ait.ui.common.TimeOfDay" />
 
+        <import type="com.ait.ui.standard.viewmodel.UiState" />
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.ait.ui.standard.viewmodel.StandardUiViewModel" />
@@ -76,6 +80,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/center"
             app:layout_constraintTop_toBottomOf="@id/nightButton" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
+            app:constraint_referenced_ids="weather,dayButton,nightButton,sunriseButton,sunsetButton" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
