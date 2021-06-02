@@ -1,9 +1,12 @@
 package com.ait.alphaforecast
 
 import android.app.Application
-import com.ait.data.ForecastRepositoryFactory
+import com.ait.data.ForecastServiceFactory
 import com.ait.data.openweather.AppIdProvider
-import com.ait.domain.model.ForecastSource
+import com.ait.data.openweather.OpenWeatherRepository
+import com.ait.data.openweather.source.OpenWeatherService
+import com.ait.data.openweather.utilities.OwServiceSettings
+import com.ait.domain.ForecastRepository
 import com.ait.ui.standard.viewmodel.StandardUiViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -27,11 +30,14 @@ class ForecastApplication : Application() {
 
     private fun dataModule() = module {
         single<AppIdProvider> { OWAppIdProvider(assets) }
-        single { ForecastSource.OPEN_WEATHER }
-        single { ForecastRepositoryFactory() }
+        single { ForecastServiceFactory() }
         single {
-            get(ForecastRepositoryFactory::class.java).getForecastService(get(), get())
+            OwServiceSettings().getForecastSourceData(get(AppIdProvider::class.java))
         }
+        single {
+            get(ForecastServiceFactory::class.java).getForecastService<OpenWeatherService>(get())
+        }
+        single<ForecastRepository> { OpenWeatherRepository(get()) }
     }
 
     private fun viewModelModule() = module {

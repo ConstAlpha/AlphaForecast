@@ -2,7 +2,7 @@ package com.ait.data.openweather.model
 
 import com.google.gson.annotations.SerializedName
 
-internal data class OwDayTemperature(
+data class OwDayTemperature(
     @SerializedName("morn") val morning: Double,
     @SerializedName("day") val day: Double,
     @SerializedName("eve") val evening: Double,

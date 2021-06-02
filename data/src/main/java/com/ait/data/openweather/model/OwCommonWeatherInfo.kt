@@ -2,7 +2,7 @@ package com.ait.data.openweather.model
 
 import com.google.gson.annotations.SerializedName
 
-internal data class OwCommonWeatherInfo (
+data class OwCommonWeatherInfo (
     @SerializedName("lat") val latitude: Double?,
     @SerializedName("lon") val longitude: Double?,
     @SerializedName("timezone") val timeZone: String,
