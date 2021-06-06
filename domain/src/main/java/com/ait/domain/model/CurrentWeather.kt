@@ -8,5 +8,6 @@ data class CurrentWeather (
     val temperature: Int,
     val humidity: Int,
     val clouds: Int,
-    val windSpeed: Int
+    val windSpeed: Int,
+    val feelsLike: Int
 )

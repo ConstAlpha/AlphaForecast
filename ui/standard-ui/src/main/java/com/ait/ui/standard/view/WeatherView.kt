@@ -11,6 +11,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.ait.ui.common.TimeOfDay
 import com.ait.ui.standard.R
 
+
 class WeatherView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
     private val dayBackgroundDrawable =
@@ -60,10 +61,10 @@ class WeatherView(context: Context, attributeSet: AttributeSet) : View(context, 
     private val TimeOfDay.drawable: Drawable
         get() =
             when (this) {
-                TimeOfDay.DAY -> dayBackgroundDrawable
                 TimeOfDay.NIGHT -> nightBackgroundDrawable
-                TimeOfDay.SUNRISE -> sunriseBackgroundDrawable
-                TimeOfDay.SUNSET -> sunsetBackgroundDrawable
+                TimeOfDay.MORNING -> sunriseBackgroundDrawable
+                TimeOfDay.DAY -> dayBackgroundDrawable
+                TimeOfDay.EVENING -> sunsetBackgroundDrawable
             }
 
     companion object {

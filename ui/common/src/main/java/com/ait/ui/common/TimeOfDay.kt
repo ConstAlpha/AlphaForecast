@@ -1,8 +1,8 @@
 package com.ait.ui.common
 
 enum class TimeOfDay {
-    SUNRISE,
+    MORNING,
     DAY,
-    SUNSET,
+    EVENING,
     NIGHT
 }

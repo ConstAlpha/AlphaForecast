@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface OpenWeatherService {
-    @GET("onecall?units=metric&exclude=minutely,hourly,alerts")
+    @GET("onecall?units=metric&exclude=minutely,alerts")
     suspend fun getWeatherForecast(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double

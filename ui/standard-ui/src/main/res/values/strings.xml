@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lorem">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+	</string>
+</resources>
