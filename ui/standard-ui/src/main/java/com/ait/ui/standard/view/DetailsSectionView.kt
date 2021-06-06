@@ -24,21 +24,21 @@ class DetailsSectionView(
         precipitationItemView = findViewById(R.id.precipitation_view)
     }
 
-    fun setContent(temperature: Int, windSpeed: Int, precipitation: Int, feelsLike: Int) {
+    fun setContent(temperature: Int, windSpeed: Int, humidity: Int, feelsLike: Int) {
         temperatureItemView.setIcon(context.getDrawable(R.drawable.ic_thermostat))
-        temperatureItemView.setTitle("Temperature")
+        temperatureItemView.setTitle(context.getString(R.string.temperature))
         temperatureItemView.setValue("${temperature}°")
 
         feelsLikeItemView.setIcon(context.getDrawable(R.drawable.ic_feels_like))
-        feelsLikeItemView.setTitle("Feels like")
+        feelsLikeItemView.setTitle(context.getString(R.string.feels_like))
         feelsLikeItemView.setValue("${feelsLike}°")
 
         windSpeedItemView.setIcon(context.getDrawable(R.drawable.ic_wind))
-        windSpeedItemView.setTitle("Wind speed")
+        windSpeedItemView.setTitle(context.getString(R.string.wind_speed))
         windSpeedItemView.setValue("$windSpeed km/h")
 
         precipitationItemView.setIcon(context.getDrawable(R.drawable.ic_umbrella))
-        precipitationItemView.setTitle("Precipitation")
-        precipitationItemView.setValue("${precipitation}%")
+        precipitationItemView.setTitle(context.getString(R.string.humidity))
+        precipitationItemView.setValue("${humidity}%")
     }
 }

@@ -43,7 +43,7 @@ class ForecastDataAdapter(
 
         when (holder) {
             is DetailsViewHolder -> {
-                holder.setContent(currentWeather.temperature, currentWeather.windSpeed, 20, currentWeather.feelsLike)
+                holder.setContent(currentWeather.temperature, currentWeather.windSpeed, currentWeather.humidity, currentWeather.feelsLike)
             }
             is HourlyWeatherViewHolder -> {
                 holder.setContent(
@@ -56,11 +56,11 @@ class ForecastDataAdapter(
 }
 
 class DetailsViewHolder(itemView: DetailsSectionView) : RecyclerView.ViewHolder(itemView) {
-    fun setContent(temperature: Int, windSpeed: Int, precipitation: Int, feelsLike: Int) {
+    fun setContent(temperature: Int, windSpeed: Int, humidity: Int, feelsLike: Int) {
         (itemView as DetailsSectionView).setContent(
             temperature,
             windSpeed,
-            precipitation,
+            humidity,
             feelsLike
         )
     }

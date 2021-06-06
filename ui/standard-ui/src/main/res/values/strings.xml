@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lorem">
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	</string>
+    <string name="temperature">Temperature</string>
+    <string name="feels_like">Feels like</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="humidity">Humidity</string>
 </resources>
