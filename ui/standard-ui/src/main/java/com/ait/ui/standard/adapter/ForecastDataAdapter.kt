@@ -1,13 +1,19 @@
 package com.ait.ui.standard.adapter
 
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ait.domain.model.ForecastedWeatherInfo
-import com.ait.ui.common.TimeOfDay
+import com.ait.ui.standard.R
+import com.ait.ui.standard.adapter.viewholder.DetailsViewHolder
+import com.ait.ui.standard.adapter.viewholder.HourlyWeatherViewHolder
 import com.ait.ui.standard.model.HourTemperatureInfo
-import com.ait.ui.standard.view.DetailsSectionView
 import java.util.*
 
 class ForecastDataAdapter(
@@ -28,7 +34,9 @@ class ForecastDataAdapter(
 
         when (section) {
             Section.Details -> {
-                val view = DetailsSectionView(parent.context)
+                val inflater =
+                    parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                val view = inflater.inflate(R.layout.details_section_layout, parent, false)
                 return DetailsViewHolder(view)
             }
             Section.HourlyWeather -> {
@@ -43,7 +51,12 @@ class ForecastDataAdapter(
 
         when (holder) {
             is DetailsViewHolder -> {
-                holder.setContent(currentWeather.temperature, currentWeather.windSpeed, currentWeather.humidity, currentWeather.feelsLike)
+                holder.setContent(
+                    currentWeather.temperature,
+                    currentWeather.windSpeed,
+                    currentWeather.humidity,
+                    currentWeather.feelsLike
+                )
             }
             is HourlyWeatherViewHolder -> {
                 holder.setContent(
@@ -55,30 +68,7 @@ class ForecastDataAdapter(
     }
 }
 
-class DetailsViewHolder(itemView: DetailsSectionView) : RecyclerView.ViewHolder(itemView) {
-    fun setContent(temperature: Int, windSpeed: Int, humidity: Int, feelsLike: Int) {
-        (itemView as DetailsSectionView).setContent(
-            temperature,
-            windSpeed,
-            humidity,
-            feelsLike
-        )
-    }
-}
-
 private enum class Section {
     Details,
     HourlyWeather
-}
-
-private class HourlyWeatherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun setContent(
-        temperatureInfo: List<HourTemperatureInfo>,
-        updateDateTime: (Date) -> Unit
-    ) {
-        val recyclerView = itemView as RecyclerView
-        recyclerView.layoutManager =
-            LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = HourlyWeatherAdapter(temperatureInfo, updateDateTime)
-    }
 }

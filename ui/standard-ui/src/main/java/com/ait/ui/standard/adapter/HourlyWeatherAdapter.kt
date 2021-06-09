@@ -1,9 +1,15 @@
 package com.ait.ui.standard.adapter
 
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ait.ui.standard.R
+import com.ait.ui.standard.adapter.viewholder.HourlyWeatherItemViewHolder
 import com.ait.ui.standard.model.HourTemperatureInfo
-import com.ait.ui.standard.view.HourlyWeatherItemView
 import java.util.*
 
 class HourlyWeatherAdapter(
@@ -18,7 +24,9 @@ class HourlyWeatherAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = HourlyWeatherItemView(parent.context)
+        val inflater =
+            parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.hourly_weather_item_layout, parent, false)
         return HourlyWeatherItemViewHolder(view)
     }
 
@@ -40,23 +48,5 @@ class HourlyWeatherAdapter(
         notifyItemChanged(previousSelectedItemPosition)
         notifyItemChanged(selectedItemPosition)
         updateDateTime(date)
-    }
-}
-
-private class HourlyWeatherItemViewHolder(itemView: HourlyWeatherItemView) :
-    RecyclerView.ViewHolder(itemView) {
-
-    fun setContent(temp: Int, date: Date, isSelected: Boolean, updateDateTime: (Date) -> Unit) {
-        val cal = Calendar.getInstance()
-        cal.time = date
-        (itemView as HourlyWeatherItemView).setItemValues(
-            temp,
-            cal.get(Calendar.HOUR_OF_DAY),
-            isSelected
-        )
-
-        itemView.setOnClickListener {
-            updateDateTime(date)
-        }
     }
 }

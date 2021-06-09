@@ -22,19 +22,18 @@ class StandardUiFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View  {
-        return FragmentStandardUiBinding.inflate(
-            inflater,
-            container,
-            false
-        ).also {
-            viewModel.weatherInfo.observe(viewLifecycleOwner, {info ->
-                val recyclerView = (view as View).findViewById<RecyclerView>(R.id.mainRecyclerView)
-                recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = ForecastDataAdapter(info, {time -> viewModel.changeDayTime(time)})
-            })
-            it.lifecycleOwner = viewLifecycleOwner
-            it.viewModel = viewModel
-        }.root
-    }
+    ) = FragmentStandardUiBinding.inflate(
+        inflater,
+        container,
+        false
+    ).also {
+        viewModel.weatherInfo.observe(viewLifecycleOwner, { info ->
+            val recyclerView = (view as View).findViewById<RecyclerView>(R.id.mainRecyclerView)
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter =
+                ForecastDataAdapter(info, { time -> viewModel.changeDayTime(time) })
+        })
+        it.lifecycleOwner = viewLifecycleOwner
+        it.viewModel = viewModel
+    }.root
 }

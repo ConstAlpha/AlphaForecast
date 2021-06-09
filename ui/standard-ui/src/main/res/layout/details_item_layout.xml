@@ -3,12 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.ait.ui.standard.view.DetailsItemViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,7 +20,7 @@
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.title, default=Title}"
+            android:text="Title"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@id/item_icon"
