@@ -39,7 +39,7 @@ internal class OwMapperTest {
     @Test
     fun `Check convert to CurrentWeather`() {
         val owCurrentWeatherInfo = createOwCurrentWeatherInfo()
-        val currentWeather = mapper.convertToDayForecastedWeather(owCurrentWeatherInfo)
+        val currentWeather = mapper.convertToCurrentWeather(owCurrentWeatherInfo)
 
         assertEquals(owCurrentWeatherInfo.sunrise * 1000, currentWeather.sunriseTime.time)
         assertEquals(owCurrentWeatherInfo.sunset * 1000, currentWeather.sunsetTime.time)
@@ -76,7 +76,8 @@ internal class OwMapperTest {
             humidity = 6,
             windSpeed = 7.0,
             weather = listOf(),
-            clouds = 8
+            clouds = 8,
+            feelsLike = 9.0
         )
     }
 

@@ -2,8 +2,7 @@ package com.ait.data.openweather.model
 
 import com.google.gson.annotations.SerializedName
 
-data class OwWeather (
+data class OwWeather(
     @SerializedName("main") val title: String,
-    @SerializedName("description") val description: String,
-    @SerializedName("icon") val iconName: String,
+    @SerializedName("description") val description: String
 )

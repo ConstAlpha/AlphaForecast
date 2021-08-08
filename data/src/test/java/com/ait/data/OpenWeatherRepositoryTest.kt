@@ -1,9 +1,6 @@
 package com.ait.data
 
-import com.ait.data.openweather.model.OwCommonWeatherInfo
-import com.ait.data.openweather.model.OwCurrentWeatherInfo
-import com.ait.data.openweather.model.OwDayTemperature
-import com.ait.data.openweather.model.OwDayWeatherInfo
+import com.ait.data.openweather.model.*
 import com.ait.data.openweather.source.OpenWeatherService
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -43,7 +40,8 @@ class OpenWeatherRepositoryTest {
             timeZone = "",
             timeZoneOffset = 1,
             current = createOwCurrentWeatherInfo(),
-            daily = listOf(createOwDayWeatherInfo())
+            daily = listOf(createOwDayWeatherInfo()),
+            hourly = listOf(createOwHourWeatherInfo())
         )
     }
 
@@ -61,6 +59,20 @@ class OpenWeatherRepositoryTest {
             windSpeed = 7.0,
             weather = listOf(),
             clouds = 8
+        )
+    }
+
+    private fun createOwHourWeatherInfo(): OwHourWeatherInfo {
+        return OwHourWeatherInfo(
+            forecastedDateTime = 1,
+            temperature = 2.0,
+            feelsLike = 3.0,
+            pressure = 5,
+            humidity = 6,
+            windSpeed = 7.0,
+            weather = listOf(),
+            clouds = 8,
+            precipitation = 9
         )
     }
 
@@ -85,7 +97,8 @@ class OpenWeatherRepositoryTest {
             humidity = 6,
             windSpeed = 7.0,
             weather = listOf(),
-            clouds = 8
+            clouds = 8,
+            feelsLike = 9.0
         )
     }
 }
