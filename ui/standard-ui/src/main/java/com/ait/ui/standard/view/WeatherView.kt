@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import com.ait.ui.common.TimeDescriptor
 import com.ait.ui.common.TimeOfDay
 import com.ait.ui.standard.R
 
@@ -52,10 +53,14 @@ class WeatherView(context: Context, attributeSet: AttributeSet) : View(context, 
         landscapeDrawable.draw(canvas)
     }
 
-    fun updateDayTime(dayTime: TimeOfDay?) {
-        dayTime?.let {
-            backgroundDrawable.swap(it.drawable)
+    fun update(timeDescriptor: TimeDescriptor?) {
+        timeDescriptor?.run {
+            updateDayTime(timeOfDay)
         }
+    }
+
+    private fun updateDayTime(dayTime: TimeOfDay) {
+        backgroundDrawable.swap(dayTime.drawable)
     }
 
     private val TimeOfDay.drawable: Drawable
@@ -79,6 +84,7 @@ class WeatherView(context: Context, attributeSet: AttributeSet) : View(context, 
         private var currentDrawable: Drawable = initDrawable
 
         fun swap(newDrawable: Drawable) {
+            if (currentDrawable == newDrawable) return
             oldDrawable = currentDrawable
             currentDrawable = newDrawable
 

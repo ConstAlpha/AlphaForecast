@@ -6,6 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.ait.domain.ForecastRepository
 import com.ait.domain.model.ForecastedWeatherInfo
+import com.ait.ui.common.TimeDescriptor
 import com.ait.ui.common.TimeOfDay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -25,27 +26,32 @@ class StandardUiViewModel(
     private val uiStateFlow = MutableStateFlow<UiState>(UiState.Success)
     val isLoading = uiStateFlow.map { it == UiState.Loading }.asLiveData()
     val weatherInfo = MutableLiveData<ForecastedWeatherInfo>()
-    val dayTime = MutableLiveData(TimeOfDay.DAY)
+    val timeDescriptor = MutableLiveData(TimeDescriptor(TimeOfDay.DAY, 0))
 
     init {
         viewModelScope.launch { loadForecast() }
     }
 
     fun changeDayTime(date: Date) {
-        val selectedHourlyWeatherInfo = weatherInfo.value?.hourly?.first { it.date == date }
+        weatherInfo.value?.let {
+            val sunrise: Long
+            val sunset: Long
+            if (date > it.currentWeather.sunsetTime) {
+                sunrise = it.currentWeather.sunriseTime.time + MILLISECONDS_IN_DAY
+                sunset = it.currentWeather.sunsetTime.time + MILLISECONDS_IN_DAY
+            } else {
+                sunrise = it.currentWeather.sunriseTime.time
+                sunset = it.currentWeather.sunsetTime.time
+            }
+            val sunPercent = (date.time - sunrise).toDouble() / (sunset - sunrise) * 100
 
-        val cal = Calendar.getInstance()
-        cal.time = date
-        // TODO Need to select TimeOfDay depending on sunrise and sunset
-        val timeOfDay: TimeOfDay = when (cal.get(Calendar.HOUR_OF_DAY)) {
-            in 0..6 -> TimeOfDay.NIGHT
-            in 7..12 -> TimeOfDay.MORNING
-            in 13..18 -> TimeOfDay.DAY
-            in 19..23 -> TimeOfDay.EVENING
-            else -> TimeOfDay.NIGHT
-        }
-        if (this.dayTime.value != timeOfDay) {
-            this.dayTime.value = timeOfDay
+            val timeOfDay: TimeOfDay = when {
+                sunPercent > -10 && sunPercent < 20 -> TimeOfDay.MORNING
+                sunPercent > 20 && sunPercent < 80 -> TimeOfDay.DAY
+                sunPercent > 80 && sunPercent < 110 -> TimeOfDay.EVENING
+                else -> TimeOfDay.NIGHT
+            }
+            this.timeDescriptor.value = TimeDescriptor(timeOfDay, sunPercent.toInt())
         }
     }
 
@@ -63,5 +69,9 @@ class StandardUiViewModel(
 
     private fun setUpCurrentWeather(weatherInfo: ForecastedWeatherInfo) {
         this.weatherInfo.value = weatherInfo
+    }
+
+    companion object {
+        private const val MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000L
     }
 }

@@ -27,12 +27,12 @@ class StandardUiFragment : Fragment() {
         container,
         false
     ).also {
-        viewModel.weatherInfo.observe(viewLifecycleOwner, { info ->
+        viewModel.weatherInfo.observe(viewLifecycleOwner) { info ->
             val recyclerView = (view as View).findViewById<RecyclerView>(R.id.mainRecyclerView)
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter =
-                ForecastDataAdapter(info, { time -> viewModel.changeDayTime(time) })
-        })
+                ForecastDataAdapter(info) { time -> viewModel.changeDayTime(time) }
+        }
         it.lifecycleOwner = viewLifecycleOwner
         it.viewModel = viewModel
     }.root
