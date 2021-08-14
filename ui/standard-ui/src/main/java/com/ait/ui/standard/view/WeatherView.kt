@@ -24,14 +24,9 @@ class WeatherView(context: Context, attributeSet: AttributeSet) : View(context, 
     private val sunsetBackgroundDrawable =
         AppCompatResources.getDrawable(context, R.drawable.sunset) ?: throw NullPointerException()
 
-    private val landscapeDrawable =
-        AppCompatResources.getDrawable(context, R.drawable.landscape)
-            ?: throw NullPointerException()
-
     private val backgroundDrawable = SwappableDrawable(dayBackgroundDrawable, this)
 
     private var backgroundBoundsRect = Rect()
-    private var landscapeBoundsRect = Rect()
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
@@ -41,16 +36,12 @@ class WeatherView(context: Context, attributeSet: AttributeSet) : View(context, 
         nightBackgroundDrawable.bounds = backgroundBoundsRect
         sunriseBackgroundDrawable.bounds = backgroundBoundsRect
         sunsetBackgroundDrawable.bounds = backgroundBoundsRect
-
-        landscapeBoundsRect.set(left, top + (bottom * (1 - LANDSCAPE_RATIO)).toInt(), right, bottom)
-        landscapeDrawable.bounds = landscapeBoundsRect
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         backgroundDrawable.draw(canvas)
-        landscapeDrawable.draw(canvas)
     }
 
     fun update(timeDescriptor: TimeDescriptor?) {
@@ -71,10 +62,6 @@ class WeatherView(context: Context, attributeSet: AttributeSet) : View(context, 
                 TimeOfDay.DAY -> dayBackgroundDrawable
                 TimeOfDay.EVENING -> sunsetBackgroundDrawable
             }
-
-    companion object {
-        private const val LANDSCAPE_RATIO = 0.5
-    }
 
     private class SwappableDrawable(
         initDrawable: Drawable,

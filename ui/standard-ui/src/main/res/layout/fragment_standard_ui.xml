@@ -50,14 +50,43 @@
                         app:update="@{viewModel.timeDescriptor}"
                         tools:ignore="ContentDescription" />
 
-                    <com.ait.ui.standard.view.Celestial
+                    <com.ait.ui.standard.view.CelestialView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
+                        app:drawable="@drawable/sun"
                         app:layout_constraintBottom_toBottomOf="@id/background"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:updateCelestialPosition="@{viewModel.timeDescriptor.sunPosition}" />
+
+                    <com.ait.ui.standard.view.CelestialView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:drawable="@drawable/moon"
+                        app:layout_constraintBottom_toBottomOf="@id/background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:updateCelestialPosition="@{viewModel.timeDescriptor.moonPosition}" />
+
+                    <com.ait.ui.standard.view.CloudsView
+                        android:id="@+id/clouds"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        app:clouds="@{viewModel.timeDescriptor.moonPosition}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.ait.ui.standard.view.LandscapeView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>

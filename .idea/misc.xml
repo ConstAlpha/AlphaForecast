@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="ui/common/src/main/res/drawable/hourly_weather_selected_item_background.xml" value="0.2552083333333333" />
+        <entry key="ui/common/src/main/res/drawable/ic_cloudy.xml" value="0.2552083333333333" />
         <entry key="ui/common/src/main/res/drawable/ic_sunny.xml" value="0.2552083333333333" />
         <entry key="ui/standard-ui/src/main/res/layout/fragment_standard_ui.xml" value="0.11626139817629179" />
       </map>

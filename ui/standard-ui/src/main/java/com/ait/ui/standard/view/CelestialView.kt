@@ -9,26 +9,32 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.DrawableCompat
 import com.ait.ui.standard.R
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-class Celestial(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
+class CelestialView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
 
     private val viewBounds = Rect()
     private val boundsRect = Rect()
 
-    private var drawable: Drawable?
+    private var drawable: Drawable? = null
 
     private var size: Int = 0
     private var position: Double = 0.0
 
     init {
-        drawable = AppCompatResources.getDrawable(context, R.drawable.sun)
-            ?: throw NullPointerException()
-//        attributeSet.
+        context.theme.obtainStyledAttributes(
+            attributeSet,
+            R.styleable.CelestialView,
+            0, 0
+        ).apply {
+            val drawableResource = getResourceId(R.styleable.CelestialView_drawable, 0)
+            if (drawableResource != 0) {
+                drawable = AppCompatResources.getDrawable(context, drawableResource)
+            }
+        }
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -55,13 +61,14 @@ class Celestial(context: Context, attributeSet: AttributeSet) : View(context, at
         val horizontalPosition = (horizontalRadius + horizontalRadius * cos(rad) - 2 * size).toInt()
 
         val verticalRadius = (viewBounds.bottom - viewBounds.top)
-        val verticalPosition = (verticalRadius - verticalRadius * sin(rad)).toInt() + verticalRadius / 6
+        val verticalPosition =
+            (verticalRadius - verticalRadius * sin(rad)).toInt() + verticalRadius / 6
 
         boundsRect.set(
             horizontalPosition,
             verticalPosition,
             horizontalPosition + size,
-            verticalPosition +size
+            verticalPosition + size
         )
         drawable?.bounds = boundsRect
     }
